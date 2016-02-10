@@ -488,6 +488,12 @@ if __name__ == '__main__':
 		while 1:
 			mainProgram();
 	
+	except KeyboardInterrupt:
+		print "CTRL+C pressed!"
+		
+	except:
+		print "Other error or exception occurred!"
+	
 	finally:
 		print "Program Exiting Now"
 		if (clnComplete == 0):
