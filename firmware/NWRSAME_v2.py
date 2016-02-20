@@ -175,7 +175,7 @@ radio.setProperty(radio.WB_SAME_INTERRUPT_SOURCE, (radio.EOMDETIEN | radio.HDRRD
 #  Tune to the desired frequency.
 time.sleep(0.5)
 radio.tuneDirect(162550)  #  Change to local frequency. 6 digits only.
-radio.setAGCStatus(0x01) Disables AGC
+radio.setAGCStatus(0x01) #Disables AGC
 #if your unsure of local frequency or there are more than one, uncomment next line
 #and it will select best frequncy to boot to. Besure to comment out radio.tuneDirect.
 
