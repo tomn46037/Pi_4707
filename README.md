@@ -20,7 +20,7 @@ The new Pi reveiver board has a built in low noise amplifier circuit that provid
 3/10/16 Update:
 I have fixed the way the messages are displayed when received, as well as indicating when the 1050Hz tone is present. The messages, if you are monitoring/controlling via a terminal will lok like this:
 
--WXR-RWT-029095-029091+0030-1511229-KNRC/NWS 
+-WXR-RWT-029095-029091+0030-1511229-KEAX/NWS 
 12222222333333333333333333333333333333333333 
 
 Originator:  WXR 
@@ -32,16 +32,16 @@ Location Codes:
 Duration:  0030 
 Day:  151 
 Time:  1229 
-Callsign:  KNRC/NWS  
+Callsign:  KEAX/NWS  
 
 
  
--WXR-RWT-029095-029091+0030-1511229-KNRC/NWS 
+-WXR-RWT-029095-029091+0030-1511229-KEAX/NWS 
 33332222333333333333333333333333333333333333 
 
 
  
--WXR-RWT-029095-029091+0030-1511229-KNRC/NWS 
+-WXR-RWT-029095-029091+0030-1511229-KEAX/NWS 
 33333333333333333333333333333333333333333333 
 
 
