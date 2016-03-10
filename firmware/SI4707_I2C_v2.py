@@ -499,7 +499,7 @@ class SI4707 :
         	#TIMER1_START();                #  Start/Re-start the 6 second timer.
 
         	self.sameHeaderCount += 1
-                print self.sameHeaderCount
+                #print self.sameHeaderCount
         	
 		if (self.sameHeaderCount >= 3): #  If this is the third Header, set msgStatus to show that it needs to be purged after usage.
 			#self.msgStatus = operator.ior(self.msgStatus, self.MSGAVL)
@@ -542,35 +542,38 @@ class SI4707 :
 				if ((self.rxBuffer[j + i] == 45) and (markChar)):
 					self.sameLength = (j + i)
                     			break
-
+                
         	self.msgStatus = operator.ior(self.msgStatus, self.MSGAVL)
+		
         	i = 0 
                   
         
         	for i in range(0,self.sameLength):
-            		#if (self.rxConfidence[i] > self.SAME_CONFIDENCE_THRESHOLD):
-            		#self.rxConfidence[i] = self.SAME_CONFIDENCE_THRESHOLD
-
+            		
         		if (self.rxConfidence[i] < self.SAME_CONFIDENCE_THRESHOLD):
                       		self.msgStatus = operator.iand(self.msgStatus, ~self.MSGAVL)
-                                         
+				                                         
 
 
-        	#if (not(self.msgStatus & self.MSGAVL)):
-			#return
+        	if (not(self.msgStatus & self.MSGAVL)):
+			return
 
         	self.rxBufferIndex = 0
         	self.rxBufferLength = self.sameLength
-                stringConf = ""
+                print '\n '
                 for i in range(0, self.rxBufferLength):
                         sys.stdout.write (chr(self.rxBuffer[i])), 
                 print ' '
-
+		
                 for i in range(0, self.rxBufferLength):
-                        print self.rxConfidence[i],
-                print ' '  
-
-                self.sameFlush();
+                        if (i == 0):
+				print self.rxConfidence[i],
+			else:
+				confStr = '\b' + str(self.rxConfidence[i])
+				print confStr,
+		print '\n'
+		  
+		
 	#  Gets the current ASQ Status.
 
     	def getAsqStatus(self, mode):
@@ -669,7 +672,8 @@ class SI4707 :
 
     	def sameParse(self):
         	self.finalMsg = []
-        	i = 0
+        	
+		i = 0
         	for i in range(0, self.sameLength):
 			self.finalMsg.append(chr(self.rxBuffer[i]))
             		time.sleep(0.02)
@@ -756,7 +760,7 @@ class SI4707 :
             		else:
                 		self.sameCallSign[i] = chr(self.rxBuffer[i + self.samePlusIndex + 14])
 
-        	self.msgStatus = operator.ior(self.msgStatus,(self.MSGUSD | self.MSGPAR | self.MSGPUR))     # Set the status to show the message was successfully Parsed.
+        	self.msgStatus = operator.ior(self.msgStatus,(self.MSGUSD | self.MSGPAR))     # Set the status to show the message was successfully Parsed.
         	
         	return
 
