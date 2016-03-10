@@ -269,7 +269,7 @@ def getStatus():
                         #print int(eomCnt)			
                         ##More application specific code could go here. (Mute audio, turn something on/off, etc.)
                         return
-                if (radio.msgStatus & radio.MSGAVL and (not(radio.msgStatus & radio.MSGUSD))): # If a message is available and not already used,
+                if (radio.msgStatus & radio.MSGAVL and (not(radio.msgStatus & radio.MSGUSD)) and radio.sameHeaderCount >=3): # If a message is available and not already used,
                         radio.sameParse()
 			
                 	if (radio.msgStatus & radio.MSGPAR):			
