@@ -170,7 +170,7 @@ radio.setProperty(radio.WB_SAME_INTERRUPT_SOURCE, (radio.EOMDETIEN | radio.HDRRD
 
 #  ASQ Interrupt Sources.
 
-#radio.setProperty(radio.WB_ASQ_INT_SOURCE, (radio.ALERTOFIEN | radio.ALERTONIEN))
+radio.setProperty(radio.WB_ASQ_INT_SOURCE, radio.ALERTONIEN)
 
 #  Tune to the desired frequency.
 time.sleep(0.5)
@@ -259,7 +259,7 @@ def getStatus():
                 print "RSSI:", int(radio.rssi-107), "dBm", " SNR:", int(radio.snr), "dBuV", " FREQOFF:", radio.freqoff
 
         if (radio.intStatus & radio.SAMEINT):
-                radio.getSameStatus(radio.CHECK)
+                radio.getSameStatus(radio.INTACK)
 
                 if (radio.sameStatus & radio.EOMDET):
                         global eomCnt
@@ -270,62 +270,60 @@ def getStatus():
                         ##More application specific code could go here. (Mute audio, turn something on/off, etc.)
                         return
                 if (radio.msgStatus & radio.MSGAVL and (not(radio.msgStatus & radio.MSGUSD))): # If a message is available and not already used,
-                        #print "Trying to parse!"
                         radio.sameParse()
+			
+                	if (radio.msgStatus & radio.MSGPAR):			
+                        	global msg
+                        	global relayTrigger1 # used to activate relay
 
-
-                if (radio.msgStatus & radio.MSGPAR):			
-                        global msg
-                        global relayTrigger1 # used to activate relay
-
-                        #Example of looking for a specific event code..i.e. TOR for Tornado
-                        if (radio.sameEventName[0] == 'T' and radio.sameEventName[1] == 'O' and radio.sameEventName[2] == 'R'):
-                                #print "Event Match True!"
-                                relayTrigger1 = 1 #trigger relay1 based on Tornado event
+                        	#Example of looking for a specific event code..i.e. TOR for Tornado
+                        	if (radio.sameEventName[0] == 'T' and radio.sameEventName[1] == 'O' and radio.sameEventName[2] == 'R'):
+                                	#print "Event Match True!"
+                                	relayTrigger1 = 1 #trigger relay1 based on Tornado event
                                
-                        msg = "ZCZC"
-                        radio.msgStatus = operator.iand(radio.msgStatus,~radio.MSGPAR) # Clear the parse status, so that we don't print it again.
-                        print ''.join(radio.finalMsg), "\n"
-                        msg = msg + str(''.join(radio.finalMsg))
-                        msg = msg + "\n\n"
-                        print "Originator: ", ''.join(radio.sameOriginatorName)
-                        msg = msg + "Originator: "
-                        msg = msg + str(''.join(radio.sameOriginatorName))
-                        msg = msg + "\n"
-                        print "Event: ", ''.join(radio.sameEventName)
-                        msg = msg + "Event: "
-                        msg = msg + str(''.join(radio.sameEventName))
-                        msg = msg + "\n"
-                        print "Locations: ", int(radio.sameLocations)
-                        msg = msg + "Locations: "
-                        msg = msg + str(int(radio.sameLocations))
-                        msg = msg + "\n"
-                        print "Location Codes:"
-                        msg = msg + "Location Codes: "                        
-                        print ', '.join(radio.sameLocationCodes)
-                        msg = msg + str(','.join(radio.sameLocationCodes))			
-                        print "\nDuration: ", ''.join(radio.sameDuration)
-                        msg = msg + "\nDuration: "
-                        msg = msg + str(''.join(radio.sameDuration))
-                        msg = msg + "\n"
-                        print "Day: ", ''.join(radio.sameDay)
-                        msg = msg + "Day: "
-                        msg = msg + str(''.join(radio.sameDay))
-                        msg = msg + "\n"
-                        print "Time: ", ''.join(radio.sameTime)
-                        msg = msg + "Time: "
-                        msg = msg + str(''.join(radio.sameTime))
-                        msg = msg + "\n"
-                        print "Callsign: ", ''.join(radio.sameCallSign), "\n"
-                        msg = msg + "Callsign: "
-                        msg = msg + str(''.join(radio.sameCallSign))
-                        msg = msg + "\n"		
+                        	msg = "ZCZC"
+                        	radio.msgStatus = operator.iand(radio.msgStatus,~radio.MSGPAR) # Clear the parse status, so that we don't print it again.
+                        	#print ''.join(radio.finalMsg), "\n"
+                        	msg = msg + str(''.join(radio.finalMsg))
+                        	msg = msg + "\n\n"
+                        	print "Originator: ", ''.join(radio.sameOriginatorName)
+                        	msg = msg + "Originator: "
+                        	msg = msg + str(''.join(radio.sameOriginatorName))
+                        	msg = msg + "\n"
+                        	print "Event: ", ''.join(radio.sameEventName)
+                        	msg = msg + "Event: "
+                        	msg = msg + str(''.join(radio.sameEventName))
+                        	msg = msg + "\n"
+                       	 	print "Locations: ", int(radio.sameLocations)
+                        	msg = msg + "Locations: "
+                        	msg = msg + str(int(radio.sameLocations))
+                        	msg = msg + "\n"
+                        	print "Location Codes:"
+                        	msg = msg + "Location Codes: "                        
+                        	print ', '.join(radio.sameLocationCodes)
+                        	msg = msg + str(','.join(radio.sameLocationCodes))			
+                        	print "\nDuration: ", ''.join(radio.sameDuration)
+                        	msg = msg + "\nDuration: "
+                        	msg = msg + str(''.join(radio.sameDuration))
+                        	msg = msg + "\n"
+                        	print "Day: ", ''.join(radio.sameDay)
+                        	msg = msg + "Day: "
+                        	msg = msg + str(''.join(radio.sameDay))
+                        	msg = msg + "\n"
+                        	print "Time: ", ''.join(radio.sameTime)
+                        	msg = msg + "Time: "
+                        	msg = msg + str(''.join(radio.sameTime))
+                        	msg = msg + "\n"
+                        	print "Callsign: ", ''.join(radio.sameCallSign), "\n"
+                        	msg = msg + "Callsign: "
+                        	msg = msg + str(''.join(radio.sameCallSign))
+                        	msg = msg + "\n"		
 
                 if (radio.msgStatus & radio.MSGPUR):  #  Signals that the third header has been received.
                         radio.sameFlush()
 
                 
-        if (radio.intStatus & radio.ASQINT):
+        if ((radio.intStatus & radio.ASQINT) or (radio.sameWat == 0x01)):
                 radio.getAsqStatus(radio.INTACK)
                 #print "sameWat:" , hex(radio.sameWat), "ASQ Stat:", hex(radio.asqStatus)
 
@@ -334,10 +332,10 @@ def getStatus():
 
                 if (radio.asqStatus == 0x01):
                         radio.sameFlush()
-                        #print "WAT is on.\n"
+                        print "\n1050Hz Alert Tone: ON\n"
 			radio.sameWat = radio.asqStatus
 		if (radio.asqStatus == 0x02):
-                        #print "WAT is off.\n"
+                        print "1050Hz Alert Tone: OFF\n"
 			radio.sameWat = radio.asqStatus
 
         if (radio.intStatus & radio.ERRINT):
