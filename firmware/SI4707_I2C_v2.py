@@ -560,18 +560,15 @@ class SI4707 :
 
         	self.rxBufferIndex = 0
         	self.rxBufferLength = self.sameLength
-                print '\n '
+                print ' '
                 for i in range(0, self.rxBufferLength):
                         sys.stdout.write (chr(self.rxBuffer[i])), 
-                print ' '
-		
+                
+                confStr = '\n'
                 for i in range(0, self.rxBufferLength):
-                        if (i == 0):
-				print self.rxConfidence[i],
-			else:
-				confStr = '\b' + str(self.rxConfidence[i])
-				print confStr,
-		print '\n'
+                        confStr += str(self.rxConfidence[i])
+				
+		print confString
 		  
 		
 	#  Gets the current ASQ Status.
