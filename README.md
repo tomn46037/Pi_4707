@@ -16,3 +16,43 @@ https://security.google.com/settings/security/apppasswords
 
 
 The new Pi reveiver board has a built in low noise amplifier circuit that provides roughly +20dB of gain on the front end. This greatly improves reception performance even in areas you may not normally receive the signal. The 4707 by defualt will come up with AGC enabled which I have found actually attenuates the signal strength even when it is not close to the 0dBm max input. I have left it as is, but have included functions to disable AGC if you would like to in order to see a true representation of RSSI (signal strength) being seen with the use of the LNA circuit. To disable in the code just uncomment the setAGCStatus(0x01) after the initial tune function. If you want to test first I also established a menu function to toggle AGC. You should see a difference when you toggle AGC and then use "r" to check the signal quality. You can check the current status of the AGC by entering "a". 0: AGC enabled, 1: AGC disabled
+
+3/10/16 Update:
+I have fixed the way the messages are displayed when received, as well as indicating when the 1050Hz tone is present. The messages, if you are monitoring/controlling via a terminal will lok like this:
+
+-WXR-RWT-029095-029091+0030-1511229-KNRC/NWS 
+12222222333333333333333333333333333333333333 
+
+Originator:  WXR 
+Event:  RWT 
+Locations:  2
+Location Codes:
+029095 , 029091 
+
+Duration:  0030 
+Day:  151 
+Time:  1229 
+Callsign:  KNRC/NWS  
+
+
+ 
+-WXR-RWT-029095-029091+0030-1511229-KNRC/NWS 
+33332222333333333333333333333333333333333333 
+
+
+ 
+-WXR-RWT-029095-029091+0030-1511229-KNRC/NWS 
+33333333333333333333333333333333333333333333 
+
+
+1050Hz Alert Tone: ON
+
+1050Hz Alert Tone: OFF
+
+EOM detected.
+
+EOM detected.
+
+EOM detected.
+
+The numbers under the the message are quality indicators for each message character above it on a scale from 0 to 3. You can see that even when the quality indicators are low (1 for example) the 4707 is still able to reliably decode the message. I have seen where some terminal programs space out these numbers instead of having them grouped together. I may see if there is a better way to print them out then how I'm doing it now.
