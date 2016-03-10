@@ -24,6 +24,14 @@ I have fixed the way the messages are displayed when received, as well as indica
 
 12222222333333333333333333333333333333333333 
 
+-WXR-RWT-029095-029091+0030-1511229-KEAX/NWS
+
+33332222333333333333333333333333333333333333 
+ 
+-WXR-RWT-029095-029091+0030-1511229-KEAX/NWS
+
+33333333333333333333333333333333333333333333 
+
 Originator:  WXR
 
 Event:  RWT
@@ -44,18 +52,6 @@ Time:  1229
 Callsign:  KEAX/NWS  
 
 
- 
--WXR-RWT-029095-029091+0030-1511229-KEAX/NWS
-
-33332222333333333333333333333333333333333333 
-
-
- 
--WXR-RWT-029095-029091+0030-1511229-KEAX/NWS
-
-33333333333333333333333333333333333333333333 
-
-
 1050Hz Alert Tone: ON
 
 1050Hz Alert Tone: OFF
@@ -66,4 +62,4 @@ EOM detected.
 
 EOM detected.
 
-The numbers under the the message are quality indicators for each message character above it on a scale from 0 to 3. You can see that even when the quality indicators are low (1 for example) the 4707 is still able to reliably decode the message. I have seen where some terminal programs space out these numbers instead of having them grouped together. I may see if there is a better way to print them out then how I'm doing it now.
+The numbers under the the message are quality indicators for each message character above it on a scale from 0 to 3. You can see that even when the quality indicators are low (1 for example) the 4707 is still able to reliably decode the message. 
