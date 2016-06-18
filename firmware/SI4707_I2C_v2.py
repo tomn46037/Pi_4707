@@ -567,7 +567,7 @@ class SI4707 :
                 for i in range(0, self.rxBufferLength):
                         confStr += str(self.rxConfidence[i])
 				
-		print confString
+		print confStr
 		  
 		
 	#  Gets the current ASQ Status.
