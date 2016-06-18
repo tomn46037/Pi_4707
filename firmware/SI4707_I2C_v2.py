@@ -21,7 +21,6 @@
 #------------------------------------------------------------------------
 #
 import sys
-sys.path.insert(0, '/home/pi/Adafruit-Raspberry-Pi-Python-Code/Adafruit_I2C')
 from Adafruit_I2C import Adafruit_I2C
 import operator
 import time
