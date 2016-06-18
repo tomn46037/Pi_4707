@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#This is the legacy file used during 4707 board creation. The new files Adafruit is posting on the Git page are not
+#compatible with the 4707 libraries. Because of that this legacy file needed to be placed in the folder for use.
 import re
 import smbus
 
