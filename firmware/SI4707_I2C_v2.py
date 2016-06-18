@@ -1,4 +1,4 @@
-#Si4707_I2C_v2.py - Python library for controling the Silicon Labs Si4707 in I2C mode (Rasperry Pi or BeagleBone Black)
+#Si4707_I2C_v2.py - Python library for controlling the Silicon Labs Si4707 in I2C mode (Rasperry Pi or BeagleBone Black)
 #
 #This file is a conversion of the provided Arduino code for AIW Industries Si4707
 #breakout module with the following license information
