@@ -419,6 +419,9 @@ def getFunction(function):
         elif (function == '+') or (function == '+\n'):
                 if (radio.volume >= 0x003F): return
                 radio.volume += 1
+		radio.setVolume(radio.volume)
+                print "Volume:", int(radio.volume)
+                return
 
 	elif (function == 'm') or (function == 'm\n'):
                 if (radio.mute):
